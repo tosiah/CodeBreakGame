@@ -1,0 +1,12 @@
+.guessing-item, .outcome-symbol-position, .outcome-symbol {
+  display: inline;
+}
+
+.guessing-list-el {
+  display: inline;
+}
+
+.guessing-list {
+  display: flex;
+  flex-direction: column;
+}

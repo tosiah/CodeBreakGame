@@ -1,0 +1,9 @@
+.symbol-choosing {
+  display: inline;
+}
+
+.confirm-btn {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
