@@ -1,0 +1,11 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+app-restart-game, app-symbol-panel, app-symbol-choice, app-guessing-list {
+  display: flex;
+  justify-content: center;
+}
+
