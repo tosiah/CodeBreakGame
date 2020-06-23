@@ -41,7 +41,7 @@ export class SymbolChoiceComponent implements OnInit {
 
   dropHandler(ev, positionID) {
     ev.preventDefault();
-    const symbolID = ev.dataTransfer.getData('text');
+    const symbolID = parseInt(ev.dataTransfer.getData('text'), 10);
     console.log('symbolID' + symbolID);
     console.log('positionID' + positionID);
     this.codeBreakService.chooseCipherEl(symbolID, positionID);
@@ -55,5 +55,4 @@ export class SymbolChoiceComponent implements OnInit {
       this.codeBreakService.addGuess();
     }
   }
-
 }

@@ -51,28 +51,48 @@ export class CodeBreakService {
   }
 
   countOutcome() {
-    let notGuessedCipherElements = [];
-    let wrongChosenCipherElements = [];
+    let notGuessedCipherElements: number[] = [];
+    let wrongChosenCipherElements: number[] = [];
 
     const currentSymbolPositionMatches = this.currentGuess.filter((el, index) => {
-      if (el != this.cipher[index]) {
+      if (el !== this.cipher[index]) {
         notGuessedCipherElements = [...notGuessedCipherElements, this.cipher[index]];
         wrongChosenCipherElements = [...wrongChosenCipherElements, this.currentGuess[index]];
       }
       console.log(notGuessedCipherElements);
       console.log(wrongChosenCipherElements);
-      return el == this.cipher[index];
+      return el === this.cipher[index];
     }).length;
 
     const currentSymbolMatches = wrongChosenCipherElements.filter((el) => {
       let correctSymbols = false;
-      if (notGuessedCipherElements.includes(parseInt(el, 10))) {
+      if (notGuessedCipherElements.includes(el)) {
         correctSymbols = true;
-        notGuessedCipherElements = notGuessedCipherElements.filter((notGuessedEl) => !notGuessedCipherElements.indexOf(el));
-        console.log('notGuessed ' + notGuessedCipherElements);
+        let deleted = false;
+        notGuessedCipherElements = notGuessedCipherElements.reduce((result, notGuessedEl) => {
+          if (notGuessedEl === el && deleted === false) {
+            deleted = true;
+            notGuessedEl = -1;
+          }
+          console.log(notGuessedEl);
+          return result = [...result, notGuessedEl];
+        }, []);
+        console.log(notGuessedCipherElements);
       }
       return correctSymbols;
     }).length;
+    /*wrongChosenCipherElements.filter((el) => {
+      let correctSymbols = false;
+      if (notGuessedCipherElements.includes(el)) {
+        correctSymbols = true;
+        notGuessedCipherElements = notGuessedCipherElements.filter((notGuessedEl) => {
+          console.log(notGuessedEl);
+          return notGuessedEl !== notGuessedCipherElements.indexOf(el);
+        });
+        console.log(notGuessedCipherElements);
+      }
+      return correctSymbols;
+    }).length;*/
     return {symbolPositionMatches: currentSymbolPositionMatches, symbolMatches: currentSymbolMatches};
   }
 
