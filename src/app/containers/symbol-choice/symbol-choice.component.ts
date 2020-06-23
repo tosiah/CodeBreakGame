@@ -5,12 +5,7 @@ import {CodeBreakService} from '../../services/code-break.service';
   selector: 'app-symbol-choice',
   template: `
     <div>
-      <!--<div class="symbol-choosing" *ngFor="let position of positions">
-        <img src="../../../assets/symbol-X.png" draggable="false"
-             alt="Position-{{position}}" id="position-{{position}}" class="symbol-position" (dragover)="dragOverHandler($event)" (drop)="
-           dropHandler($event, position)">
-      </div>-->
-      <div class="symbol-choosing" *ngFor="let symbol of this.currentGuess; let position = index">
+      <div class="symbol-choosing"  *ngFor="let symbol of currentGuess; let position = index">
         <img *ngIf="symbol!==-1" src="../../../assets/symbol-{{symbol}}.png"
              draggable="false"
              alt="Position-{{position}}" id="position-{{position}}" class="symbol-position" (dragover)="dragOverHandler($event)" (drop)="
@@ -28,9 +23,10 @@ import {CodeBreakService} from '../../services/code-break.service';
 })
 export class SymbolChoiceComponent implements OnInit {
 
-  currentGuess: number[] = this.codeBreakService.getCurrentGuess();
+  currentGuess: number[];
 
   constructor(private codeBreakService: CodeBreakService) {
+    this.currentGuess = this.codeBreakService.getCurrentGuess();
   }
 
   ngOnInit(): void {
@@ -49,6 +45,7 @@ export class SymbolChoiceComponent implements OnInit {
     console.log('symbolID' + symbolID);
     console.log('positionID' + positionID);
     this.codeBreakService.chooseCipherEl(symbolID, positionID);
+    this.currentGuess = this.codeBreakService.getCurrentGuess();
   }
 
   addGuessHandler() {
