@@ -23,10 +23,12 @@ import {CodeBreakService} from '../../services/code-break.service';
 })
 export class SymbolChoiceComponent implements OnInit {
 
-  currentGuess: number[];
 
   constructor(private codeBreakService: CodeBreakService) {
-    this.currentGuess = this.codeBreakService.getCurrentGuess();
+  }
+
+  get currentGuess() {
+    return this.codeBreakService.getCurrentGuess();
   }
 
   ngOnInit(): void {
@@ -45,7 +47,6 @@ export class SymbolChoiceComponent implements OnInit {
     console.log('symbolID' + symbolID);
     console.log('positionID' + positionID);
     this.codeBreakService.chooseCipherEl(symbolID, positionID);
-    this.currentGuess = this.codeBreakService.getCurrentGuess();
   }
 
   addGuessHandler() {
